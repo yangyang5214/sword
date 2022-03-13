@@ -12,7 +12,7 @@ def main(source_img_path: str):
     gap = (height - new_height) // 2
     cropped = img[gap:new_height + gap, 0:width]
     final_path = '/tmp/result_{}'.format(source_img_path.split('/')[-1])
-    cv2.imwrite(final_path, cropped)
+    cv2.imwrite(final_path, cropped, [int(cv2.IMWRITE_JPEG_QUALITY), 80])
     print(final_path)
 
 
