@@ -5,13 +5,13 @@ import sys
 import cv2
 
 
-def main(source_img_path: str):
+def main(source_img_path: str, target_dir=None):
     img = cv2.imread(source_img_path)
     height, width, _ = img.shape
     new_height = int(width // 16 * 9)
     gap = (height - new_height) // 2
     cropped = img[gap:new_height + gap, 0:width]
-    final_path = '/tmp/result_{}'.format(source_img_path.split('/')[-1])
+    final_path = '{}/result_{}'.format(target_dir, source_img_path.split('/')[-1])
     cv2.imwrite(final_path, cropped, [int(cv2.IMWRITE_JPEG_QUALITY), 80])
     print(final_path)
 
@@ -32,4 +32,4 @@ if __name__ == '__main__':
     if not os.path.exists(img_path):
         print("img_path: {} not exists".format(img_path))
         exit(-1)
-    main(img_path)
+    main(img_path, "/tmp")
